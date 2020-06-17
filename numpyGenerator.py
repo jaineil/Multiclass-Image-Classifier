@@ -8,13 +8,12 @@ import numpy as np
 from tqdm import tqdm
 
 
-TRAIN1 = '/Users/jaineilmandavia/Desktop/cerebranium-task/train-data/sandwich'
-TRAIN2 = '/Users/jaineilmandavia/Desktop/cerebranium-task/train-data/burger'
-TRAIN3 = '/Users/jaineilmandavia/Desktop/cerebranium-task/train-data/vadapav'
-TEST = '/Users/jaineilmandavia/Desktop/cerebranium-task/test-data'
+TRAIN1 = '/Users/jaineilmandavia/Desktop/train-data/sandwich'
+TRAIN2 = '/Users/jaineilmandavia/Desktop/train-data/burger'
+TRAIN3 = '/Users/jaineilmandavia/Desktop/train-data/vadapav'
+TEST = '/Users/jaineilmandavia/Desktop/test-data'
 
 IMG_SIZE = 50
-LR = 1e-3
 
 ###############################################################################
 
@@ -38,7 +37,6 @@ def create_train_data():
         except Exception as e:
             print(str(e))
         training_data.append([np.array(img),np.array(label)])
-    #shuffle(training_data)
 
     for img in tqdm(os.listdir(TRAIN2)):
         label = label_image("burger")
@@ -50,7 +48,6 @@ def create_train_data():
         except Exception as e:
             print(str(e))
         training_data.append([np.array(img),np.array(label)])
-    #shuffle(training_data)
 
     for img in tqdm(os.listdir(TRAIN3)):
         label = label_image("vadapav")
@@ -62,7 +59,6 @@ def create_train_data():
         except Exception as e:
             print(str(e))
         training_data.append([np.array(img),np.array(label)])
-    #shuffle(training_data)
 
     np.save('train_data.npy', training_data)
     return training_data
