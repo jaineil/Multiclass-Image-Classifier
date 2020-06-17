@@ -84,10 +84,9 @@ test_data = process_test_data()
 
 # If you have already created a Numpy array of the dataset using the 'numpyGenerator.py' 
 # And want to run this on cloud (Colab):
-# Simply 'import' the train_data.npy and test_data.npy on Colab!
-
-train_data = np.load('train_data.npy', allow_pickle=True)
-test_data = np.load('test_data.npy', allow_pickle=True)
+# Simply 'import' this file
+train_data = np.load('train_data.npy')
+test_data = np.load('test_data.npy')
 
 ###############################################################################
 
@@ -124,26 +123,24 @@ if os.path.exists('{}.meta'.format(MODEL_NAME)):
 
 ############################################################################### 
 
-#train_data.shape = (1860, 2) => 1860 image rows, 2 columns (grayscale image, label)
+train = train_data[:-490]
+validation_test = train_data[-490:]
 
-train = train_data[:-336]
-validation_test = train_data[-336:]
+X = np.array([i[0] for i in train_data]).reshape(-1,IMG_SIZE,IMG_SIZE,1)
+Y = [i[1] for i in train_data]
 
-X = np.array([i[0] for i in train]).reshape(-1,IMG_SIZE,IMG_SIZE,1)
-Y = [i[1] for i in train]
+test_x = np.array([i[0] for i in validation_test]).reshape(-1,IMG_SIZE,IMG_SIZE,1)
+test_y = [i[1] for i in validation_test]
 
-test_x = np.array([i[0] for i in test]).reshape(-1,IMG_SIZE,IMG_SIZE,1)
-test_y = [i[1] for i in test]
-
-model.fit({'input': X}, {'targets': Y}, n_epoch=30, validation_set=({'input': test_x}, {'targets': test_y}), snapshot_step=500, show_metric=True, run_id=MODEL_NAME)
-
-model.save(MODEL_NAME) 
+model.fit({'input': X}, {'targets': Y}, n_epoch=25, 
+    snapshot_step=500, show_metric=True, validation_set=({'input': test_x}, {'targets': test_y}), run_id=MODEL_NAME)
+model.save(MODEL_NAME)   
 
 ###############################################################################
 
 fig=plt.figure()
 
-for num, data in enumerate(test_data):
+for num, data in enumerate(test_data[:72]):
     
     img_num = data[1]
     img_data = data[0]
@@ -152,7 +149,7 @@ for num, data in enumerate(test_data):
     data = img_data.reshape(IMG_SIZE, IMG_SIZE, 1)
     model_out = model.predict([data])[0]
     if np.argmax(model_out) == 0: str_label='Sandwich'
-    elif np.argmax(model_out) == 1: str_lab='Burger'
+    elif np.argmax(model_out) == 1: str_label='Burger'
     else: str_label='VadaPav'        
     y.imshow(orig,cmap='gray')
     plt.title(str_label)

@@ -1,4 +1,4 @@
-# Generates a Numpy array of the images in the dataset for training. It has (X, 2) dimensions. 
+# Generates a Numpy array of the images in the dataset. It was (X, 2) dimensions. 
 # X -> number of images in the dataset as rows
 # 2 columns -> grayscale image & label for it
 
@@ -7,18 +7,14 @@ import cv2
 import numpy as np
 from tqdm import tqdm
 
-# https://www.kaggle.com/brtknr/sushisandwich? dataset for sandwich images
-TRAIN1 = '/Users/jaineilmandavia/GitHub/Multiclass-Image-Classifier/train-data/sandwich'
 
-# https://www.kaggle.com/meemr5/vadapav dataset for vada pav & burger images
-TRAIN2 = '/Users/jaineilmandavia/GitHub/Multiclass-Image-Classifier/train-data/burger'
-TRAIN3 = '/Users/jaineilmandavia/GitHub/Multiclass-Image-Classifier/train-data/vadapav'
-
-TEST = '/Users/jaineilmandavia/GitHub/Multiclass-Image-Classifier/test-data'
+TRAIN1 = '/Users/jaineilmandavia/Desktop/cerebranium-task/train-data/sandwich'
+TRAIN2 = '/Users/jaineilmandavia/Desktop/cerebranium-task/train-data/burger'
+TRAIN3 = '/Users/jaineilmandavia/Desktop/cerebranium-task/train-data/vadapav'
+TEST = '/Users/jaineilmandavia/Desktop/cerebranium-task/test-data'
 
 IMG_SIZE = 50
 LR = 1e-3
-MODEL_NAME = 'sandwich_burger_vadapav-{}-{}.model'.format(LR, '6conv-basic') 
 
 ###############################################################################
 
@@ -87,7 +83,8 @@ def process_test_data():
             #print(type(img))
             img = cv2.resize(img, (IMG_SIZE,IMG_SIZE))
         except Exception as e:
-            print(str(e))
+            print(str(e)+img_num)
+            #print(img_num)
         testing_data.append([np.array(img), img_num])
     
     #shuffle(testing_data)
