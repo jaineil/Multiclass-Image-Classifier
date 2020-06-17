@@ -8,16 +8,23 @@ Eventually, to learn about Multi-class Image Classification, I decided to abstra
 Dependancies to be installed before playing around with this: 
 
 $ sudo easy_install pip
+
 $ sudo pip install --upgrade pip
+
 $ pip3 install tensorflow==1.14
+
 $ pip3 install matplotlib
+
 $ pip3 install numpy 
+
 $ pip3 install tqdm
+
 $ pip3 install opencv-python
 
 #############################################################################################
 
 https://www.kaggle.com/brtknr/sushisandwich? : dataset for sandwich images
+
 https://www.kaggle.com/meemr5/vadapav : dataset for vada pav & burger images
 
 (Cleaned the dataset for corrupt image files)
