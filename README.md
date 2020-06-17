@@ -22,15 +22,15 @@ https://www.kaggle.com/meemr5/vadapav : dataset for vada pav & burger images
 
 (Cleaned the dataset for corrupt image files)
 
-Total images dataset = ~3000
+Total images dataset = ~3000.
 
-Split that into training/testing as 80%/20% of the total image dataset.
+Split that into training/testing as 80% - 20% of the total image dataset.
 
-Designed the training data as 40%/40%/20% of respective sandwich/burger/vadapav images. 
+Split the training data as 40% sandwich images - 40% burger images - 20% vadapav images.
 
 Finally had 963 sandwich images, 1004 burger images and 492 vadapav images.
-Total size of training dataset = 2459 images
-Total size of testing dataset = 608
+Total size of training dataset = 2459 images. 
+Total size of testing dataset = 608.
 
 Used 20% (490 images) of training data for cross-validation achieving 97.96% accuracy 
 
